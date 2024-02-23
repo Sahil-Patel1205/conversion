@@ -55,7 +55,7 @@
                 let second = a - parseInt(a/100)*100;
                 let final = forTwos(second);
 
-                if(second == 0){
+                if(second.toString() == "00"){
                     return first + " hundrade"; 
                 }
                 else{
@@ -66,7 +66,17 @@
             function forTwos(a){
                 let b = a%10;
                 let c = parseInt(a/10);
-                return tens[c] +once[b];
+                // return tens[c] +once[b];
+
+                if(b.toString() == "0"){
+                    return tens[c];
+                }
+                else{
+                    return tens[c] + once[b];
+                }
+                
+
+                
             }
             document.getElementById('ans').innerHTML =ans;
         }
