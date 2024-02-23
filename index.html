@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function numtoword(a)
+        {
+            var once =[' zero',' One',' Two',' Three',' Four',' Five',' Six',' Seven',' Eight',' Nine']
+            var twos =[' Ten',' Eleven',' Twelve',' Thirteen',' Fourteen',' Fifteen',' Sixteen',' Seventeen',' Eighteen',' nineteen',' Twenty']
+            var tens =['',' Ten',' Twenty',' Thirty',' Forty',' Fifty',' Sixty',' Seventy',' Eighty',' Ninty']
+            var ans = "";
+
+            if(a<10)
+                ans = once[a];
+            else if (a<=20)
+                ans = twos[a-10];
+            else if (a<100)
+            {
+                ans = forTwos(a);
+            }
+
+            else if(a<=999){
+                ans = forThrees(a);            
+            }
+
+            else if(a<100000){
+              ans = forFives(a);
+            }
+
+            else if(a<1000000){
+                let firstTwo = Math.floor(a/100000);
+                let firstAns = forTwos(firstTwo);
+
+                let lastFive = a - parseInt(a/100000)*100000;
+                let finalAns = forFives(lastFive);
+
+                ans = firstAns + " laks" + finalAns
+            }
+            
+            function forFives(a){
+                let firstTwo = Math.floor(a/1000);
+                let firstAns = forTwos(firstTwo);
+
+                let finalThree = a - parseInt(a/1000)*1000;
+                let finalAns = forThrees(finalThree);
+
+                return firstAns + " Thausand" + finalAns;
+            }
+
+            function forThrees(a){
+                let first = once[parseInt(a/100)];
+                let second = a - parseInt(a/100)*100;
+                let final = forTwos(second);
+
+                if(second == 0){
+                    return first + " hundrade"; 
+                }
+                else{
+                    return first + " hundrade" + final;
+                }
+            }
+
+            function forTwos(a){
+                let b = a%10;
+                let c = parseInt(a/10);
+                return tens[c] +once[b];
+            }
+            document.getElementById('ans').innerHTML =ans;
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+    <h1>No. to words convertion</h1>
+    <form>
+        <input type="number" onkeyup="numtoword(this.value);" placeholder="Enter Number">
+    </form>
+    <h1 id="ans"></h1>
+</body>
+</html>
