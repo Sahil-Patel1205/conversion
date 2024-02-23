@@ -47,15 +47,24 @@
                 let finalThree = a - parseInt(a/1000)*1000;
                 let finalAns = forThrees(finalThree);
 
-                return firstAns + " Thausand" + finalAns;
+                if(finalThree.toString() == "0"){
+                    return firstAns + " Thausand";
+                }
+                else{
+                    return firstAns + " Thausand" + finalAns;
+
+                }
+
             }
 
             function forThrees(a){
+                
                 let first = once[parseInt(a/100)];
                 let second = a - parseInt(a/100)*100;
                 let final = forTwos(second);
 
-                if(second.toString() == "00"){
+                
+                if(second.toString() == "0"){
                     return first + " hundrade"; 
                 }
                 else{
